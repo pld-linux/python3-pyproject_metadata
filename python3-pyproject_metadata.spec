@@ -6,7 +6,7 @@
 Summary:	PEP 621 metadata parsing
 Name:		python3-%{module}
 Version:	0.9.0
-Release:	2
+Release:	3
 License:	MIT
 Group:		Libraries/Python
 Source0:	https://pypi.debian.net/pyproject_metadata/%{module}-%{version}.tar.gz
