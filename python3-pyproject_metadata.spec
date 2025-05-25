@@ -1,9 +1,11 @@
+#
 # Conditional build:
 %bcond_without	doc	# API documentation
-%bcond_with		tests	# unit tests
+%bcond_with	tests	# unit tests
 
 %define		module	pyproject_metadata
 Summary:	PEP 621 metadata parsing
+Summary(pl.UTF-8):	Analiza metadanych PEP 621
 Name:		python3-%{module}
 Version:	0.9.0
 Release:	3
@@ -31,9 +33,15 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 This project does not implement the parsing of pyproject.toml
 containing PEP 621 metadata.
 
-instead, given a Python data structure representing PEP 621 metadata
+Instead, given a Python data structure representing PEP 621 metadata
 (already parsed), it will validate this input and generate a PEP
 643-compliant metadata file (e.g. PKG-INFO).
+
+%description -l pl.UTF-8
+Ten projekt nie implementuje analizy plików pyproject.toml,
+zawierających metadane PEP 621, ale po przekazaniu (już
+przeanalizowanej) struktury danych metadanych PEP 621, sprawdza jej
+poprawność i generuje plik metadanych zgodny z PEP 643 (np. PKG-INFO).
 
 %package apidocs
 Summary:	API documentation for Python %{module} module
