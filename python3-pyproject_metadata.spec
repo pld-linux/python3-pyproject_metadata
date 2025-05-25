@@ -15,17 +15,29 @@ Source0:	https://pypi.debian.net/pyproject_metadata/%{module}-%{version}.tar.gz
 # Source0-md5:	d947b3c632f4aee9cf23bb5950ac02f9
 URL:		https://pypi.org/project/pyproject-metadata/
 BuildRequires:	python3-build
+BuildRequires:	python3-flit_core
 BuildRequires:	python3-installer
-BuildRequires:	python3-modules >= 1:3.2
+BuildRequires:	python3-modules >= 1:3.7
 %if %{with tests}
-#BuildRequires:	python3-
+BuildRequires:	python3-packaging >= 19.0
+BuildRequires:	python3-pytest >= 6.2.4
+%if "%{py3_ver}" == "3.7"
+BuildRequires:	python3-typing_extensions
+%endif
+%if "%{_ver_lt %{py3_ver} 3.11}" == "1"
+BuildRequires:	python3-exceptiongroup
+BuildRequires:	python3-tomli >= 1.0.0
+%endif
 %endif
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 2.044
 %if %{with doc}
-BuildRequires:	sphinx-pdg-3
+BuildRequires:	python3-furo >= 2023.9.10
+BuildRequires:	python3-myst_parser
+BuildRequires:	python3-sphinx_autodoc_typehints >= 1.10.0
+BuildRequires:	sphinx-pdg-3 >= 7.0
 %endif
-Requires:	python3-modules >= 1:3.2
+Requires:	python3-modules >= 1:3.7
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -61,9 +73,7 @@ Dokumentacja API modułu Pythona %{module}.
 %py3_build_pyproject
 
 %if %{with tests}
-# use explicit plugins list for reliable builds (delete PYTEST_PLUGINS if empty)
 PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \
-PYTEST_PLUGINS= \
 %{__python3} -m pytest tests
 %endif
 
