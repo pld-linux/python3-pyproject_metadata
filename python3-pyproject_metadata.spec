@@ -60,6 +60,7 @@ PYTEST_PLUGINS= \
 %endif
 
 %if %{with doc}
+PYTHONPATH=$(pwd) \
 sphinx-build-3 -b html docs docs/_build/html
 rm -rf docs/_build/html/_sources
 %endif
