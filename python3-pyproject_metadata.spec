@@ -1,18 +1,19 @@
 #
 # Conditional build:
 %bcond_without	doc	# API documentation
-%bcond_with	tests	# unit tests
+%bcond_without	tests	# unit tests
 
 %define		module	pyproject_metadata
 Summary:	PEP 621 metadata parsing
 Summary(pl.UTF-8):	Analiza metadanych PEP 621
 Name:		python3-%{module}
-Version:	0.9.0
-Release:	3
+Version:	0.9.1
+Release:	1
 License:	MIT
 Group:		Libraries/Python
-Source0:	https://pypi.debian.net/pyproject_metadata/%{module}-%{version}.tar.gz
-# Source0-md5:	d947b3c632f4aee9cf23bb5950ac02f9
+#Source0Download: https://pypi.org/simple/pyproject-metadata/
+Source0:	https://files.pythonhosted.org/packages/source/p/pyproject_metadata/%{module}-%{version}.tar.gz
+# Source0-md5:	d897e16dca18204e421f912487730668
 URL:		https://pypi.org/project/pyproject-metadata/
 BuildRequires:	python3-build
 BuildRequires:	python3-flit_core
@@ -80,7 +81,6 @@ PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \
 %if %{with doc}
 PYTHONPATH=$(pwd) \
 sphinx-build-3 -b html docs docs/_build/html
-rm -rf docs/_build/html/_sources
 %endif
 
 %install
@@ -93,12 +93,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README.md
+%doc LICENSE README.md
 %{py3_sitescriptdir}/%{module}
 %{py3_sitescriptdir}/%{module}-%{version}.dist-info
 
 %if %{with doc}
 %files apidocs
 %defattr(644,root,root,755)
-%doc docs/_build/html/*
+%doc docs/_build/html/{_modules,_static,api,*.html,*.js}
 %endif
