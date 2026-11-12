@@ -7,27 +7,24 @@
 Summary:	PEP 621 metadata parsing
 Summary(pl.UTF-8):	Analiza metadanych PEP 621
 Name:		python3-%{module}
-Version:	0.9.1
+Version:	0.12.1
 Release:	1
 License:	MIT
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/pyproject-metadata/
 Source0:	https://files.pythonhosted.org/packages/source/p/pyproject_metadata/%{module}-%{version}.tar.gz
-# Source0-md5:	d897e16dca18204e421f912487730668
+# Source0-md5:	d44c15fd176128acd9497af2512085a0
 URL:		https://pypi.org/project/pyproject-metadata/
 BuildRequires:	python3-build
-BuildRequires:	python3-flit_core
+BuildRequires:	python3-flit_core >= 3.11
 BuildRequires:	python3-installer
-BuildRequires:	python3-modules >= 1:3.7
+BuildRequires:	python3-modules >= 1:3.8
 %if %{with tests}
-BuildRequires:	python3-packaging >= 19.0
-BuildRequires:	python3-pytest >= 6.2.4
-%if "%{py3_ver}" == "3.7"
-BuildRequires:	python3-typing_extensions
-%endif
+BuildRequires:	python3-packaging >= 23.2
+BuildRequires:	python3-pytest >= 7.4
 %if "%{_ver_lt %{py3_ver} 3.11}" == "1"
-BuildRequires:	python3-exceptiongroup
-BuildRequires:	python3-tomli >= 1.0.0
+BuildRequires:	python3-exceptiongroup >= 1.0
+BuildRequires:	python3-tomli >= 1.1
 %endif
 %endif
 BuildRequires:	rpm-pythonprov
@@ -38,7 +35,7 @@ BuildRequires:	python3-myst_parser
 BuildRequires:	python3-sphinx_autodoc_typehints >= 1.10.0
 BuildRequires:	sphinx-pdg-3 >= 7.0
 %endif
-Requires:	python3-modules >= 1:3.7
+Requires:	python3-modules >= 1:3.8
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
